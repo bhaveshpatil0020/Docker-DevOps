@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>🎓 EduTrack</h2>
+        </div>
+
+        <ul class="menu">
+            <li class="active">🏠 Dashboard</li>
+            <li>👨‍🎓 Students</li>
+            <li>📊 Analytics</li>
+            <li>⚙ Settings</li>
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Header -->
+        <div class="header">
+
+            <div>
+                <h1>Student Management Dashboard</h1>
+                <p>Manage students and track records efficiently</p>
+            </div>
+
+            <div class="header-actions">
+
+                <input
+                    type="text"
+                    id="searchStudent"
+                    placeholder="Search student..."
+                >
+
+                <button onclick="loadStudents()">
+                    Refresh
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <h3>Total Students</h3>
+                <span id="totalStudents">0</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>Records Loaded</h3>
+                <span id="recordsLoaded">0</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>Database</h3>
+                <span class="online">Online</span>
+            </div>
+
+            <div class="stat-card">
+                <h3>System Health</h3>
+                <span>100%</span>
+            </div>
+
+        </div>
+
+        <!-- Form + Chart -->
+        <div class="top-section">
+
+            <!-- Student Form -->
+            <div class="card">
+
+                <h2>Add / Update Student</h2>
+
+                <input type="hidden" id="studentId">
+
+                <div class="input-group">
+                    <label>First Name</label>
+                    <input id="fname" placeholder="Enter first name">
+                </div>
+
+                <div class="input-group">
+                    <label>Last Name</label>
+                    <input id="lname" placeholder="Enter last name">
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input id="email" placeholder="Enter email">
+                </div>
+
+                <div class="btn-row">
+
+                    <button class="primary-btn"
+                        onclick="addStudent()">
+                        Add Student
+                    </button>
+
+                    <button class="success-btn"
+                        onclick="updateStudent()">
+                        Update Student
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Analytics -->
+            <div class="card">
+
+                <div class="chart-header">
+                    <h2>Student Analytics</h2>
+                </div>
+
+                <canvas id="studentChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- Table -->
+        <div class="card table-card">
+
+            <div class="table-header">
+
+                <h2>Student Records</h2>
+
+                <button onclick="loadStudents()">
+                    Refresh Data
+                </button>
+
+            </div>
+
+            <table>
+
+                <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Student Name</th>
+                    <th>Email Address</th>
+                    <th>Actions</th>
+                </tr>
+
+                </thead>
+
+                <tbody id="studentTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
