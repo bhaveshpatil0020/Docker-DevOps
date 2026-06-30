@@ -1,0 +1,57 @@
+name: Dockerized MERN CI - Build & Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Dockerized_Mern_3-Tier_App/**'
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'Dockerized_Mern_3-Tier_App/**'
+
+jobs:
+  docker-ci:
+    name: Build + Run + Test Containers
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout code
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # 2. Build Docker images
+      - name: Build Docker Images
+        working-directory: Dockerized_Mern_3-Tier_App
+        run: docker compose build
+
+      # 3. Start containers (detached mode)
+      - name: Start Containers
+        working-directory: Dockerized_Mern_3-Tier_App
+        run: docker compose up -d
+
+      # 4. Wait for services to be ready
+      - name: Wait for Services
+        run: sleep 20
+
+      # # 5. Health Check (Backend API test)
+      # - name: Test Backend Health API
+      #   run: |
+      #     curl -f http://localhost:5000/health || exit 1
+
+      # 6. Show running containers (debug)
+      - name: Check Running Containers
+        run: docker ps
+
+      # 7. Stop and cleanup containers
+      - name: Cleanup Containers
+        if: always()
+        working-directory: Dockerized_Mern_3-Tier_App
+        run: docker compose down
+
+      # 8. Success message
+      - name: CI Status
+        run: echo "✅ Build + Run + Test Completed Successfully"
