@@ -1,6 +1,6 @@
 # 🚀 Dockerized Wanderlust – 3-Tier Mern-Stack Application deployement Using Docker.
 
-## 📌 Overview
+## 📌 Overview :-
 
 This repository documents my DevOps learning journey by containerizing and deploying a MERN Stack application using **Docker**, **Docker Compose**, and **AWS EC2**.
 
